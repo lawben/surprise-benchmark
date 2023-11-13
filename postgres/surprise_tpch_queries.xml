@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates>
+   <template name="Q33">
+   <query><![CDATA[SELECT COUNT(*) FROM lineitem WHERE l_orderkey = ?]]></query>
+      <types><type>INTEGER</type></types>
+      <values><value>60</value></values>
+   </template>
+   <template name="Q34">
+    <query><![CDATA[SELECT COUNT(*) FROM lineitem WHERE l_orderkey = ?]]></query>
+  <types><type>INTEGER</type></types>
+  <values><value>40</value></values>
+   </template>
+</templates>
