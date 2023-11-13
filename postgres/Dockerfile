@@ -2,7 +2,15 @@
 #   docker build -t surprise-benchmark-postgres .
 #
 # and to run it:
-#   docker run -v $(pwd)/../results/postgres:/results surprise-benchmark-postgres
+#   docker run --rm \
+#              -v $(pwd)/../results/postgres:/results \
+#              -v $(pwd)/../data/surprise_tpch_queries.xml:/benchbase/config/surprise_tpch_queries.xml:ro \
+#              -v $(pwd)/../scripts/run_benchmark.sh:/scripts/run_benchmark.sh:ro \
+#              surprise-benchmark-postgres
+#
+# Note that this will delete the container after running to clean up.
+# Reove the `--rm` argument to prevent this.
+
 
 # This is the system that we pass to Benchbase.
 # Supported system's in benchbase are, e.g., postgres or mysql.
@@ -46,8 +54,6 @@ RUN apt-get update && apt-get install -y openjdk-17-jre
 # Copy config files
 COPY init_tpch_config.xml /benchbase/config/init_tpch_config.xml
 COPY surprise_tpch_config.xml /benchbase/config/surprise_tpch_config.xml
-COPY surprise_tpch_queries.xml /benchbase/config/surprise_tpch_queries.xml
-COPY --chmod=744 setup_system.sh /setup_system.sh
-COPY --chmod=744 run_benchmark.sh /benchbase/run_benchmark.sh
+COPY --chmod=744 setup_system.sh /scripts/setup_system.sh
 WORKDIR /benchbase
-ENTRYPOINT /setup_system.sh && /benchbase/run_benchmark.sh
+ENTRYPOINT /scripts/setup_system.sh && /scripts/run_benchmark.sh
