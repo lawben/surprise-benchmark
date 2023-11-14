@@ -45,6 +45,7 @@ do
             -v $ROOT_DIR/results/$system:/results \
             -v $ROOT_DIR/data/surprise_tpch_queries.xml:/benchbase/config/surprise_tpch_queries.xml:ro \
             -v $ROOT_DIR/scripts/run_benchmark.sh:/scripts/run_benchmark.sh:ro \
-	    --ulimit memlock=1073741824 \
+            --ulimit memlock=1073741824 \
+	    --cap-add=sys_nice \
             surprise-benchmark-$system
 done

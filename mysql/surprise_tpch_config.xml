@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+<parameters>
+
+    <!-- Connection details -->
+    <type>MYSQL</type>
+    <driver>com.mysql.cj.jdbc.Driver</driver>
+    <url>jdbc:mysql://localhost:3306/benchbase?rewriteBatchedStatements=true&amp;allowLoadLocalInfile=true&amp;allowPublicKeyRetrieval=True&amp;sslMode=DISABLED</url>
+    <username>mysql</username>
+    <password>password</password>
+    <isolation>TRANSACTION_SERIALIZABLE</isolation>
+    <batchsize>1024</batchsize>
+
+    <!-- Note: these example template reuses TPC-C queries and data as a demonstration, but others are possible.
+      To test this sample as is, you must first run benchbase with parameters `load=true` and
+      `config=sample_tpcc_config.xml` to load the TPC-C data to the target database.
+      Other templated benchmarks need to ensure that the data is loaded manually prior to running the benchmark.
+    -->
+
+    <query_templates_file>/benchbase/config/surprise_tpch_queries.xml</query_templates_file>
+
+    <!-- The workload -->
+    <terminals>1</terminals>
+    <works>
+        <work>
+            <serial>true</serial>
+            <rate>unlimited</rate>
+            <weights>1,1</weights>
+        </work>
+    </works>
+
+    <!-- Select all templates that are executed. -->
+    <transactiontypes>
+        <transactiontype>
+            <name>Q33</name>
+        </transactiontype>
+        <transactiontype>
+            <name>Q34</name>
+        </transactiontype>
+    </transactiontypes>
+</parameters>

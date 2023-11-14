@@ -2,26 +2,13 @@
 <parameters>
 
     <!-- Connection details -->
-    <!-- <type>clickhouse</type>
-    <driver>com.clickhouse.jdbc.ClickHouseDriver</driver>
-    <url>jdbc:clickhouse://localhost:8123/clickhouse</url> -->
-
     <type>MYSQL</type>
     <driver>com.mysql.cj.jdbc.Driver</driver>
-    <url>jdbc:mysql://localhost:9004/clickhouse?rewriteBatchedStatements=true&amp;allowLoadLocalInfile=true&amp;allowPublicKeyRetrieval=True&amp;sslMode=DISABLED</url>
-    <username>default</username>
+    <url>jdbc:mysql://localhost:3306/benchbase?rewriteBatchedStatements=true&amp;allowLoadLocalInfile=true&amp;allowPublicKeyRetrieval=True&amp;sslMode=DISABLED</url>
+    <username>mysql</username>
     <password>password</password>
+    <isolation>TRANSACTION_SERIALIZABLE</isolation>
     <batchsize>1024</batchsize>
-    <isolation>TRANSACTION_NONE</isolation>
-    <ddlpath>/benchbase/config/ddl-clickhouse.sql</ddlpath>
-
-    <!-- <type>POSTGRES</type>
-    <driver>org.postgresql.Driver</driver>
-    <url>jdbc:clickhouse://localhost:9005/clickhouse?sslmode=disable&amp;ApplicationName=tpch&amp;reWriteBatchedInserts=true&amp;preferQueryMode=simple</url>
-    <username>default</username>
-    <password>password</password>
-    <batchsize>1024</batchsize>
-    <ddlpath>/benchbase/config/ddl-clickhouse.sql</ddlpath> -->
 
     <!-- ################################## -->
     <!-- DO NOT CHANGE ANYTHING BELOW HERE! -->
