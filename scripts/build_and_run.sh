@@ -40,9 +40,11 @@ echo "Running benchmarks on all systems"
 for system in $SYSTEMS
 do
     echo "Benchmarking system: $system"
-    docker run --rm \
+    docker run \
+	    --rm \
             -v $ROOT_DIR/results/$system:/results \
             -v $ROOT_DIR/data/surprise_tpch_queries.xml:/benchbase/config/surprise_tpch_queries.xml:ro \
             -v $ROOT_DIR/scripts/run_benchmark.sh:/scripts/run_benchmark.sh:ro \
+	    --ulimit memlock=1073741824 \
             surprise-benchmark-$system
 done
