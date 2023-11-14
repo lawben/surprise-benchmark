@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+<parameters>
+
+    <!-- Connection details -->
+    <type>monetdb</type>
+    <driver>org.monetdb.jdbc.MonetDriver</driver>
+    <url>jdbc:monetdb://localhost:50000/monetdb?sslmode=disable&amp;ApplicationName=tpch&amp;reWriteBatchedInserts=true</url>
+    <username>monetdb</username>
+    <password>password</password>
+    <isolation>TRANSACTION_SERIALIZABLE</isolation>
+    <batchsize>1024</batchsize>
+
+    <query_templates_file>/benchbase/config/surprise_tpch_queries.xml</query_templates_file>
+
+    <!-- The workload -->
+    <terminals>1</terminals>
+    <works>
+        <work>
+            <serial>true</serial>
+            <rate>unlimited</rate>
+            <weights>1,1</weights>
+        </work>
+    </works>
+
+    <!-- Select all templates that are executed. -->
+    <transactiontypes>
+        <transactiontype>
+            <name>Q33</name>
+        </transactiontype>
+        <transactiontype>
+            <name>Q34</name>
+        </transactiontype>
+    </transactiontypes>
+</parameters>
