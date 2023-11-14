@@ -7,7 +7,7 @@ SCRIPT_DIR=$( cd "$(dirname "$0")" ; pwd -P )
 ROOT_DIR=$(dirname "$SCRIPT_DIR")
 echo "Project root dir: $ROOT_DIR"
 
-ALL_SYSTEMS=(postgres)
+ALL_SYSTEMS=(postgres mysql)
 SYSTEMS=$@
 if [ $# -eq 0 ]
 then
