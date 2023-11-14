@@ -2,13 +2,10 @@
 <parameters>
 
     <!-- Connection details -->
-    <!-- <type>clickhouse</type>
+    <type>clickhouse</type>
     <driver>com.clickhouse.jdbc.ClickHouseDriver</driver>
-    <url>jdbc:clickhouse://localhost:8123/clickhouse</url> -->
-
-    <type>MYSQL</type>
-    <driver>com.mysql.cj.jdbc.Driver</driver>
-    <url>jdbc:mysql://localhost:9004/clickhouse?rewriteBatchedStatements=true&amp;allowLoadLocalInfile=true&amp;allowPublicKeyRetrieval=True&amp;sslMode=DISABLED</url>
+    <!-- <url>jdbc:clickhouse://localhost:8123/clickhouse?rewriteBatchedStatements=true&amp;allowLoadLocalInfile=true&amp;sslMode=DISABLED&amp;implicit_transactions=1</url> -->
+    <url>jdbc:clickhouse://localhost:8123/clickhouse</url>
     <username>default</username>
     <password>password</password>
     <batchsize>1024</batchsize>
