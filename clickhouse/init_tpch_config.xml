@@ -2,13 +2,23 @@
 <parameters>
 
     <!-- Connection details -->
-    <type>POSTGRES</type>
-    <driver>org.postgresql.Driver</driver>
-    <url>jdbc:postgresql://localhost:5432/postgres?sslmode=disable&amp;ApplicationName=tpch&amp;reWriteBatchedInserts=true</url>
-    <username>postgres</username>
+    <type>clickhouse</type>
+    <driver>com.clickhouse.jdbc.ClickHouseDriver</driver>
+    <!-- <url>jdbc:clickhouse://localhost:8123/clickhouse?rewriteBatchedStatements=true&amp;allowLoadLocalInfile=true&amp;sslMode=DISABLED&amp;implicit_transactions=1</url> -->
+    <url>jdbc:clickhouse://localhost:8123/clickhouse</url>
+    <username>default</username>
     <password>password</password>
-    <isolation>TRANSACTION_SERIALIZABLE</isolation>
     <batchsize>1024</batchsize>
+    <isolation>TRANSACTION_NONE</isolation>
+    <ddlpath>/benchbase/config/ddl-clickhouse.sql</ddlpath>
+
+    <!-- <type>POSTGRES</type>
+    <driver>org.postgresql.Driver</driver>
+    <url>jdbc:clickhouse://localhost:9005/clickhouse?sslmode=disable&amp;ApplicationName=tpch&amp;reWriteBatchedInserts=true&amp;preferQueryMode=simple</url>
+    <username>default</username>
+    <password>password</password>
+    <batchsize>1024</batchsize>
+    <ddlpath>/benchbase/config/ddl-clickhouse.sql</ddlpath> -->
 
     <!-- ################################## -->
     <!-- DO NOT CHANGE ANYTHING BELOW HERE! -->
