@@ -6,7 +6,6 @@ on:
       - main
   pull_request:
 
-
 jobs:
   build:
     name: Build + Run
@@ -20,5 +19,8 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - name: Build and run system
-        run: ./scripts/build_and_run.sh ${{ matrix.system }}
+      - name: Build Docker image
+        run: ./scripts/build.sh ${{ matrix.system }}
+
+      - name: Run benchmark
+        run: ./scripts/run.sh ${{ matrix.system }}
