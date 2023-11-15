@@ -15,7 +15,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        systems: [clickhouse, monetdb, mysql, postgres, umbra]
+        system: [clickhouse, monetdb, mysql, postgres] # "umbra" does not work yet, as I don't know if we should push the binary...
 
     steps:
       - uses: actions/checkout@v3
