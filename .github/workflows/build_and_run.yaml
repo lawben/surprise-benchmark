@@ -1,0 +1,24 @@
+name: Build + Run
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+
+
+jobs:
+  build:
+    name: Build + Run
+    runs-on: ubuntu-latest
+
+    strategy:
+      fail-fast: false
+      matrix:
+        systems: [clickhouse, monetdb, mysql, postgres, umbra]
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Build and run system
+        run: ./scripts/build_and_run.sh ${{ matrix.system }}
