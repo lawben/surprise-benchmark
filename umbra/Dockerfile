@@ -12,7 +12,7 @@ ARG BB_SYSTEM=postgres
 # This part of the setup should not be changed. It just builds Benchbase.
 FROM eclipse-temurin:17 as benchbase
 ARG BB_SYSTEM
-RUN apt-get update && apt-get install -y git
+RUN apt-get -qq update && apt-get -qq install -y git > /dev/null
 RUN git clone --depth 1 --single-branch -b surprise https://github.com/lawben/benchbase.git && \
     cd benchbase && ./mvnw clean package -P $BB_SYSTEM --no-transfer-progress -DskipTests && \
     cd target && tar xzf benchbase-$BB_SYSTEM.tgz
@@ -32,7 +32,7 @@ FROM ubuntu:22.04 as benchmark_executor
 ARG BB_SYSTEM
 COPY --from=benchbase /benchbase/target/benchbase-$BB_SYSTEM/ /benchbase
 # Install Java Runtime to execute benchbase.jar
-RUN apt-get update && apt-get install -y openjdk-17-jre
+RUN apt-get -qq update && apt-get -qq install -y openjdk-17-jre > /dev/null
 
 # Copy config files
 COPY init_tpch_config.xml /benchbase/config/init_tpch_config.xml
@@ -46,7 +46,7 @@ ENTRYPOINT /scripts/setup_system.sh && /scripts/run_benchmark.sh
 ##############################################
 # We don't push the Umbra binary to GitHub, so make sure your local copy is in the surprise-benchmark/umbra/umbra_bin directory.
 # Make sure this contains the bin/ and lib/ directories.
-RUN apt-get update && apt-get install -y postgresql-client
+RUN apt-get -qq update && apt-get -qq install -y postgresql-client
 COPY umbra_bin/ /umbra
 COPY ddl-umbra.sql /benchbase/config/ddl-umbra.sql
 
