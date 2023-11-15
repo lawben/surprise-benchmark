@@ -1,0 +1,26 @@
+name: Build + Run
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+
+jobs:
+  build:
+    name: Build + Run
+    runs-on: ubuntu-latest
+
+    strategy:
+      fail-fast: false
+      matrix:
+        system: [clickhouse, monetdb, mysql, postgres] # "umbra" does not work yet, as I don't know if we should push the binary...
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Build Docker image
+        run: ./scripts/build.sh ${{ matrix.system }}
+
+      - name: Run benchmark
+        run: ./scripts/run.sh ${{ matrix.system }}

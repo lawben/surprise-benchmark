@@ -11,10 +11,10 @@ ARG BB_SYSTEM=monetdb
 # This part of the setup should not be changed. It just builds Benchbase.
 FROM eclipse-temurin:17 as benchbase
 ARG BB_SYSTEM
-RUN apt-get update && apt-get install -y git
+RUN apt-get -qq update && apt-get -qq install -y git > /dev/null
 RUN git clone --depth 1 --single-branch -b surprise https://github.com/lawben/benchbase.git && \
-    cd benchbase && ./mvnw clean package -P $BB_SYSTEM -DskipTests && \
-    cd target && tar xvzf benchbase-$BB_SYSTEM.tgz
+    cd benchbase && ./mvnw clean package -P $BB_SYSTEM --no-transfer-progress -DskipTests && \
+    cd target && tar xzf benchbase-$BB_SYSTEM.tgz
 
 
 ##########################################
