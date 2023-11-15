@@ -14,7 +14,7 @@ then
     echo "Using all systems";
     SYSTEMS=$ALL_SYSTEMS;
 fi
-echo "Running benchmarks for systms: $SYSTEMS"
+echo "Running benchmarks for systems: ($SYSTEMS)"
 
 if [[ -z "${NO_CACHE}" ]]; then
     echo "Builindg using cache"
@@ -46,6 +46,6 @@ do
             -v $ROOT_DIR/data/surprise_tpch_queries.xml:/benchbase/config/surprise_tpch_queries.xml:ro \
             -v $ROOT_DIR/scripts/run_benchmark.sh:/scripts/run_benchmark.sh:ro \
             --ulimit memlock=1073741824 \
-	    --cap-add=sys_nice \
+            --cap-add=sys_nice \
             surprise-benchmark-$system
 done

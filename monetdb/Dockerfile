@@ -1,10 +1,6 @@
 # To build this image, in the monetdb/ directory, run:
 #   docker build -t surprise-benchmark-monetdb .
 
-# Note that this will delete the container after running to clean up.
-# Reove the `--rm` argument to prevent this.
-
-
 # This is the system that we pass to Benchbase.
 # Supported system's in benchbase are, e.g., postgres or mysql.
 ARG BB_SYSTEM=monetdb

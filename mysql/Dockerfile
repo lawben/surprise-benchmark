@@ -1,16 +1,5 @@
 # To build this image, in the mysql/ directory, run:
 #   docker build -t surprise-benchmark-mysql .
-#
-# and to run it:
-#   docker run --rm \
-#              -v $(pwd)/../results/mysql:/results \
-#              -v $(pwd)/../data/surprise_tpch_queries.xml:/benchbase/config/surprise_tpch_queries.xml:ro \
-#              -v $(pwd)/../scripts/run_benchmark.sh:/scripts/run_benchmark.sh:ro \
-#              surprise-benchmark-mysql
-#
-# Note that this will delete the container after running to clean up.
-# Reove the `--rm` argument to prevent this.
-
 
 # This is the system that we pass to Benchbase.
 # Supported system's in benchbase are, e.g., postgres or mysql.

@@ -1,16 +1,5 @@
 # To build this image, in the postgres/ directory, run:
 #   docker build -t surprise-benchmark-postgres .
-#
-# and to run it:
-#   docker run --rm \
-#              -v $(pwd)/../results/postgres:/results \
-#              -v $(pwd)/../data/surprise_tpch_queries.xml:/benchbase/config/surprise_tpch_queries.xml:ro \
-#              -v $(pwd)/../scripts/run_benchmark.sh:/scripts/run_benchmark.sh:ro \
-#              surprise-benchmark-postgres
-#
-# Note that this will delete the container after running to clean up.
-# Reove the `--rm` argument to prevent this.
-
 
 # This is the system that we pass to Benchbase.
 # Supported system's in benchbase are, e.g., postgres or mysql.
@@ -23,7 +12,7 @@ ARG BB_SYSTEM=postgres
 FROM eclipse-temurin:17 as benchbase
 ARG BB_SYSTEM
 RUN apt-get update && apt-get install -y git
-RUN git clone --depth 1 --single-branch https://github.com/lawben/benchbase.git && \
+RUN git clone --depth 1 --single-branch -b surprise https://github.com/lawben/benchbase.git && \
     cd benchbase && ./mvnw clean package -P $BB_SYSTEM -DskipTests && \
     cd target && tar xvzf benchbase-$BB_SYSTEM.tgz
 
