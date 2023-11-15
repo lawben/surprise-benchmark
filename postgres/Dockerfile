@@ -14,7 +14,7 @@ ARG BB_SYSTEM
 RUN apt-get update && apt-get install -y git
 RUN git clone --depth 1 --single-branch -b surprise https://github.com/lawben/benchbase.git && \
     cd benchbase && ./mvnw clean package -P $BB_SYSTEM --no-transfer-progress -DskipTests && \
-    cd target && tar xvzf benchbase-$BB_SYSTEM.tgz
+    cd target && tar xzf benchbase-$BB_SYSTEM.tgz
 
 
 ##########################################
