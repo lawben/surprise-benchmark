@@ -35,6 +35,7 @@ RUN apt-get -qq update && apt-get -qq install -y openjdk-17-jre > /dev/null
 
 # Copy config files
 COPY init_tpch_config.xml /benchbase/config/init_tpch_config.xml
+COPY run_tpch_config.xml /benchbase/config/run_tpch_config.xml
 COPY surprise_tpch_config.xml /benchbase/config/surprise_tpch_config.xml
 COPY --chmod=744 setup_system.sh /scripts/setup_system.sh
 WORKDIR /benchbase
@@ -46,4 +47,4 @@ ENTRYPOINT /scripts/setup_system.sh && /scripts/run_benchmark.sh
 
 # RUN ...
 COPY ddl-clickhouse.sql /benchbase/config/ddl-clickhouse.sql
-
+COPY clickhouse_tpch_queries.xml /benchbase/config/clickhouse_tpch_queries.xml

@@ -25,10 +25,10 @@
     <!-- Select all templates that are executed. -->
     <transactiontypes>
         <transactiontype>
-            <name>Q33</name>
+            <name>S1</name>
         </transactiontype>
         <transactiontype>
-            <name>Q34</name>
+            <name>S2</name>
         </transactiontype>
     </transactiontypes>
 </parameters>

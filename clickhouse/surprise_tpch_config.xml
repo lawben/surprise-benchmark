@@ -10,13 +10,6 @@
     <password>password</password>
     <batchsize>1024</batchsize>
     <isolation>TRANSACTION_NONE</isolation>
-    <ddlpath>/benchbase/config/ddl-clickhouse.sql</ddlpath>
-
-    <!-- Note: these example template reuses TPC-C queries and data as a demonstration, but others are possible.
-      To test this sample as is, you must first run benchbase with parameters `load=true` and
-      `config=sample_tpcc_config.xml` to load the TPC-C data to the target database.
-      Other templated benchmarks need to ensure that the data is loaded manually prior to running the benchmark.
-    -->
 
     <query_templates_file>/benchbase/config/surprise_tpch_queries.xml</query_templates_file>
 
@@ -33,10 +26,10 @@
     <!-- Select all templates that are executed. -->
     <transactiontypes>
         <transactiontype>
-            <name>Q33</name>
+            <name>S1</name>
         </transactiontype>
         <transactiontype>
-            <name>Q34</name>
+            <name>S2</name>
         </transactiontype>
     </transactiontypes>
 </parameters>
