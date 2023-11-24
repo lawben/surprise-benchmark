@@ -47,3 +47,7 @@ COPY surprise_tpch_config.xml /benchbase/config/surprise_tpch_config.xml
 COPY --chmod=744 setup_system.sh /scripts/setup_system.sh
 WORKDIR /benchbase
 ENTRYPOINT /scripts/setup_system.sh && /scripts/run_benchmark.sh
+
+COPY monetdb_tpch_queries.xml /benchbase/config/monetdb_tpch_queries.xml
+COPY run_tpch_config.xml /benchbase/config/run_tpch_config.xml
+
