@@ -14,7 +14,7 @@ FROM eclipse-temurin:17 as benchbase
 ARG BB_SYSTEM
 RUN apt-get -qq update && apt-get -qq install -y git > /dev/null
 RUN git clone --depth 1 --single-branch -b surprise https://github.com/lawben/benchbase.git && \
-    cd benchbase && ./mvnw clean package -P $BB_SYSTEM --no-transfer-progress -DskipTests && \
+    cd benchbase && ./mvnw clean package -P $BB_SYSTEM --no-transfer-progress -T 1C -DskipTests && \
     cd target && tar xzf benchbase-$BB_SYSTEM.tgz
 
 
