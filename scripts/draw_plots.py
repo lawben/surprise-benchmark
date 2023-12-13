@@ -23,7 +23,7 @@ def load_results(results_dir: pathlib.Path) -> pd.DataFrame:
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(prog="draw_plots",description="Plot BenchBase results.")
     parser.add_argument("results_dir", help="BenchBase results directory", type=pathlib.Path)
-    parser.add_argument("plots_dir", help="output plots directory", type=pathlib.Path)
+    parser.add_argument("plot_file", help="output plot file path", type=pathlib.Path)
     parser.add_argument("-v", "--value", help="value to plot",
                         action="store", type=str, default="Median Latency (millisecond)")
     parser.add_argument("-s", "--sort", help="sort queries by results of given system",
@@ -35,14 +35,13 @@ if __name__ == "__main__":
     if not args.results_dir.is_dir():
         raise FileNotFoundError("The results directory does not exist!")
 
-    if not args.plots_dir.is_dir():
-        os.makedirs(args.plots_dir, exist_ok=True)
+    if not args.plot_file.parent.is_dir():
+        os.makedirs(args.plot_file, exist_ok=True)
 
     results = load_results(args.results_dir)
-    results.to_csv(args.plots_dir / "results.csv", index=False)
 
     if args.sort is None:
-        sorted_queries = results["query"].unique()
+        sorted_queries = list(sorted(results["query"].unique(), key=lambda x: (x[0], int(x[1:]))))  # sort by query name
     else:
         sorted_queries = results[results["system"] == args.sort].sort_values(by=args.value)["query"].unique()
     query2index = {query: idx for idx, query in enumerate(sorted_queries)}
@@ -67,8 +66,8 @@ if __name__ == "__main__":
         )
 
     plt.xticks(np.arange(len(sorted_queries)), sorted_queries)
-    plt.ylabel(args.value + f"Normalized By {args.normalize}" if args.normalize is not None else "")
+    plt.ylabel(args.value + (f" Normalized By {args.normalize}" if args.normalize is not None else ""))
     plt.legend()
     plt.tight_layout()
 
-    plt.savefig(args.plots_dir / ("normalized_latency.pdf" if args.normalize is not None else "latency.pdf"))
+    plt.savefig(args.plot_file)
