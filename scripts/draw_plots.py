@@ -43,7 +43,7 @@ if __name__ == "__main__":
     if args.sort is None:
         sorted_queries = list(sorted(results["query"].unique(), key=lambda x: (x[0], int(x[1:]))))  # sort by query name
     else:
-        sorted_queries = results[results["system"] == args.sort].sort_values(by=args.value)["query"].unique()
+        sorted_queries = list(reversed(results[results["system"] == args.sort].sort_values(by=args.value, ascending=False)["query"].unique()))
     query2index = {query: idx for idx, query in enumerate(sorted_queries)}
 
     plt.style.use("ggplot")
