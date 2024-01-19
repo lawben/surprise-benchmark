@@ -1,4 +1,5 @@
 import argparse
+import logging
 import os
 import pathlib
 import random
@@ -150,20 +151,23 @@ def validate_query(query: str, schema: str) -> str | None:
 
 
 def save_queries(queries: list[str], queries_dir: pathlib.Path) -> None:
-    prev_max_idx = max(int(p.name[1:-4]) for p in sorted(queries_dir.glob("*.sql")))
+    existing_queries = list(sorted(queries_dir.glob("*.sql")))
+    prev_max_idx = -1 if len(existing_queries) == 0 else max(int(p.name[1:-4]) for p in existing_queries)
     for ix, query in enumerate(queries):
         with open(queries_dir / f"S{ix + prev_max_idx + 1}.sql", "w", encoding="utf-8") as file:
             file.write(query)
 
 
 if __name__ == "__main__":
+    logging.basicConfig(encoding='utf-8', level=logging.INFO)
+
     parser = argparse.ArgumentParser(prog="generate_queries", description="Generate queries with GPT.")
     parser.add_argument("queries_dir", help="output queries directory", type=pathlib.Path)
     parser.add_argument("schema_file", help="schema sql file", type=pathlib.Path)
     parser.add_argument("-r", "--requests", help="number of API requests", type=int, default=1)
     parser.add_argument("-q", "--queries_per_request", help="number of queries per API request", type=int, default=3)
     parser.add_argument("-s", "--seed", help="random seed for seeds for API requests", type=int, default=837596)
-    parser.add_argument("-m", "--model", help="model for API requests", type=str, default="gpt-4")
+    parser.add_argument("-m", "--model", help="model for API requests", type=str, default="gpt-4-0613")
     parser.add_argument("-x", "--max_tokens", help="max_tokens for API requests", type=int, default=None)
     parser.add_argument("-t", "--temperature", help="temperature for API requests", type=float, default=0)
     parser.add_argument("-f", "--force", help="do not require confirmation below given cost", type=float, default=0.1)
