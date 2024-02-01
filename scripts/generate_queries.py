@@ -9,7 +9,7 @@ from openai_api_helpers import openai_execute
 
 
 def create_prompt(schema: str, num_queries_per_request: int) -> str:
-    return f"""Generate {num_queries_per_request} OLAP SQL queries that follow the schema below. I need just the SQL statements, no explanations. Each query should be wrapped in ```sql <query> ```. The goal is to stress-test the database management system, so use advanced features such as CTEs, pattern machting, set predicates, and recursion.
+    return f"""Generate {num_queries_per_request} OLAP SQL queries that follow the schema below. I need just the SQL statements, no explanations. Each query should be wrapped in ```sql <query> ```. The goal is to stress-test the database management system, so use advanced features such as CTEs, pattern matching, set predicates, and recursion.
 
 Schema:
 
@@ -62,20 +62,19 @@ order by
 
 def create_requests(
         prompt: str,
-        random_seed: int,
         num_requests: int,
         model: str,
         max_tokens: str,
         temperature: float
 ) -> list[dict]:
-    random.seed(random_seed)
+    random.seed(57070563)
     requests = []
     for ix in range(num_requests):
         request = {
             "model": model,
             "max_tokens": max_tokens,
             "temperature": temperature,
-            "seed": random.randint(0, 1000000),
+            "seed": random.randint(0, 1000000000),
             "messages": [
                 {
                     "role": "user",
@@ -162,12 +161,11 @@ if __name__ == "__main__":
     logging.basicConfig(encoding='utf-8', level=logging.INFO)
 
     parser = argparse.ArgumentParser(prog="generate_queries", description="Generate queries with GPT.")
-    parser.add_argument("queries_dir", help="output queries directory", type=pathlib.Path)
-    parser.add_argument("schema_file", help="schema sql file", type=pathlib.Path)
+    parser.add_argument("-d", "--queries_dir", help="output queries directory", type=pathlib.Path, default=pathlib.Path("data/queries"))
+    parser.add_argument("-s", "--schema_file", help="schema sql file", type=pathlib.Path, default=pathlib.Path("data/tpch_schema.sql"))
     parser.add_argument("-r", "--requests", help="number of API requests", type=int, default=1)
     parser.add_argument("-q", "--queries_per_request", help="number of queries per API request", type=int, default=3)
-    parser.add_argument("-s", "--seed", help="random seed for seeds for API requests", type=int, default=837596)
-    parser.add_argument("-m", "--model", help="model for API requests", type=str, default="gpt-4-0613")
+    parser.add_argument("-m", "--model", help="model for API requests", type=str, default="gpt-4-1106-preview")
     parser.add_argument("-x", "--max_tokens", help="max_tokens for API requests", type=int, default=None)
     parser.add_argument("-t", "--temperature", help="temperature for API requests", type=float, default=0)
     parser.add_argument("-f", "--force", help="do not require confirmation below given cost", type=float, default=0.1)
@@ -179,7 +177,7 @@ if __name__ == "__main__":
         schema = file.read()
 
     prompt = create_prompt(schema, args.queries_per_request)
-    requests = create_requests(prompt, args.seed, args.requests, args.model, args.max_tokens, args.temperature)
+    requests = create_requests(prompt, args.requests, args.model, args.max_tokens, args.temperature)
 
     responses = openai_execute(requests=requests, force=args.force)
 
