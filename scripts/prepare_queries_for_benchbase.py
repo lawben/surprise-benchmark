@@ -56,7 +56,9 @@ if __name__ == "__main__":
     names_and_queries = []
     for query_path in sorted(args.queries_dir.glob("*.sql")):
         with open(query_path, "r", encoding="utf-8") as file:
-            names_and_queries.append((query_path.name[:-4], file.read()))
+            query = file.read()
+            query = " ".join(query.split())
+            names_and_queries.append((query_path.name[:-4], query))
 
     update_xml_file(names_and_queries, args.xml_file)
     update_system_xml_files(names_and_queries, args.system_xml_files)

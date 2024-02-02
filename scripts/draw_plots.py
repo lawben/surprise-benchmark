@@ -21,15 +21,21 @@ def load_results(results_dir: pathlib.Path) -> pd.DataFrame:
 
 
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser(prog="draw_plots",description="Plot BenchBase results.")
-    parser.add_argument("results_dir", help="BenchBase results directory", type=pathlib.Path)
-    parser.add_argument("plot_file", help="output plot file path", type=pathlib.Path)
-    parser.add_argument("-v", "--value", help="value to plot",
-                        action="store", type=str, default="Median Latency (millisecond)")
-    parser.add_argument("-s", "--sort", help="sort queries by results of given system",
-                        action="store", type=str, default=None)
-    parser.add_argument("-n", "--normalize", help="normalize results by given query",
-                        action="store", type=str, default=None)
+    parser = argparse.ArgumentParser(prog="draw_plots", description="Plot BenchBase results.")
+    parser.add_argument("-d", "--results_dir", help="BenchBase results directory", type=pathlib.Path, default=pathlib.Path("results"))
+    parser.add_argument("-f", "--plot_file", help="output plot file path", type=pathlib.Path, default=pathlib.Path("plots/plot.pdf"))
+    parser.add_argument(
+        "-v", "--value", help="value to plot",
+        action="store", type=str, default="Median Latency (millisecond)"
+        )
+    parser.add_argument(
+        "-s", "--sort", help="sort queries by results of given system",
+        action="store", type=str, default=None
+        )
+    parser.add_argument(
+        "-n", "--normalize", help="normalize results by given query",
+        action="store", type=str, default=None
+        )
     args = parser.parse_args()
 
     if not args.results_dir.is_dir():
