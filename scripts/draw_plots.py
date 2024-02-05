@@ -47,7 +47,10 @@ if __name__ == "__main__":
     results = load_results(args.results_dir)
 
     if args.sort is None:
-        sorted_queries = list(sorted(results["query"].unique(), key=lambda x: (x[0], int(x[1:]))))  # sort by query name
+        try:
+            sorted_queries = list(sorted(results["query"].unique(), key=lambda x: (x[0], int(x[1:]))))  # sort by query name
+        except:
+            sorted_queries = list(sorted(results["query"].unique()))
     else:
         sorted_queries = list(reversed(results[results["system"] == args.sort].sort_values(by=args.value, ascending=False)["query"].unique()))
     query2index = {query: idx for idx, query in enumerate(sorted_queries)}
