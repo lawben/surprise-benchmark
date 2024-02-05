@@ -13,11 +13,15 @@ def load_results(results_dir: pathlib.Path) -> pd.DataFrame:
     for system_path in sorted(results_dir.glob("*/")):
         for result_path in sorted(system_path.glob("*.results.*.csv")):
             df = pd.read_csv(result_path)
+            df = df.max()
             df["system"] = system_path.name
             df["query"] = re.match(r".*\.results\.(\w+)\.csv", result_path.name).groups()[0]
             df["file"] = result_path.name
+            df = df.transpose()
             results.append(df)
-    return pd.concat(results, ignore_index=True)
+    df = pd.concat(results, axis=1)
+    df = df.transpose()
+    return df
 
 
 if __name__ == "__main__":
