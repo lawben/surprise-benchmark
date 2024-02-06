@@ -15,6 +15,7 @@ do
     docker run \
 	    --rm \
             -v $ROOT_DIR/results/$system:/results \
+            -v $ROOT_DIR/data/tpch_data:/benchbase/tpch_data:ro \
             -v $ROOT_DIR/data/surprise_tpch_queries.xml:/benchbase/config/surprise_tpch_queries.xml:ro \
             -v $ROOT_DIR/scripts/run_benchmark.sh:/scripts/run_benchmark.sh:ro \
             --ulimit memlock=1073741824 \

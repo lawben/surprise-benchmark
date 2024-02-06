@@ -33,6 +33,8 @@ COPY --from=benchbase /benchbase/target/benchbase-$BB_SYSTEM/ /benchbase
 ##############################################
 
 # RUN ...
+COPY setup_database.sql /benchbase/scripts/setup_database.sql
+COPY --chmod=744 setup_database.sh /benchbase/scripts/setup_database.sh
 
 ################################
 ### DO NOT CHANGE BELOW HERE ###

@@ -3,8 +3,14 @@
 set -e
 
 # Create TPC-H tables and load data.
-echo "Setting up TPC-H..."
-java -jar /benchbase/benchbase.jar -b tpch -c config/init_tpch_config.xml -d /results --create=true --load=true --execute=false
+#echo "Setting up TPC-H..."
+#java -jar /benchbase/benchbase.jar -b tpch -c config/init_tpch_config.xml -d /results --create=true --load=true --execute=false
+
+#echo -e "\n\n\n\n"
+
+echo -e "Setup database..."
+bash /benchbase/scripts/setup_database.sh
+
 echo -e "\n\n\n\n"
 
 # Run to see that TPC-H works.
