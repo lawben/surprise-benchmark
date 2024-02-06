@@ -96,104 +96,28 @@ COPY INTO partsupp FROM '/benchbase/tpch_data/partsupp.tbl' ON CLIENT USING DELI
 COPY INTO orders FROM '/benchbase/tpch_data/orders.tbl' ON CLIENT USING DELIMITERS '|', E'\n', '"';
 
 COPY INTO lineitem FROM '/benchbase/tpch_data/lineitem.tbl' ON CLIENT USING DELIMITERS '|', E'\n', '"';
---
--- ALTER TABLE PART ADD PRIMARY KEY (P_PARTKEY);
--- ALTER TABLE SUPPLIER ADD PRIMARY KEY (S_SUPPKEY);
--- ALTER TABLE PARTSUPP ADD PRIMARY KEY (PS_PARTKEY, PS_SUPPKEY);
--- ALTER TABLE CUSTOMER ADD PRIMARY KEY (C_CUSTKEY);
--- ALTER TABLE ORDERS ADD PRIMARY KEY (O_ORDERKEY);
--- ALTER TABLE LINEITEM ADD PRIMARY KEY (L_ORDERKEY, L_LINENUMBER);
--- ALTER TABLE NATION ADD PRIMARY KEY (N_NATIONKEY);
--- ALTER TABLE REGION ADD PRIMARY KEY (R_REGIONKEY);
---
--- -- foreign keys
---
--- ALTER TABLE SUPPLIER ADD FOREIGN KEY (S_NATIONKEY) REFERENCES NATION(N_NATIONKEY);
---
--- ALTER TABLE PARTSUPP ADD FOREIGN KEY (PS_PARTKEY) REFERENCES PART(P_PARTKEY);
--- ALTER TABLE PARTSUPP ADD FOREIGN KEY (PS_SUPPKEY) REFERENCES SUPPLIER(S_SUPPKEY);
---
--- ALTER TABLE CUSTOMER ADD FOREIGN KEY (C_NATIONKEY) REFERENCES NATION(N_NATIONKEY);
---
--- ALTER TABLE ORDERS ADD FOREIGN KEY (O_CUSTKEY) REFERENCES CUSTOMER(C_CUSTKEY);
---
--- ALTER TABLE LINEITEM ADD FOREIGN KEY (L_ORDERKEY) REFERENCES ORDERS(O_ORDERKEY);
--- ALTER TABLE LINEITEM ADD FOREIGN KEY (L_PARTKEY,L_SUPPKEY) REFERENCES PARTSUPP(PS_PARTKEY,PS_SUPPKEY);
---
--- ALTER TABLE NATION ADD FOREIGN KEY (N_REGIONKEY) REFERENCES REGION(R_REGIONKEY);
 
-------------------------------------------------------------------------------------------------------------------------
--- tables for split queries
-------------------------------------------------------------------------------------------------------------------------
+ALTER TABLE PART ADD PRIMARY KEY (P_PARTKEY);
+ALTER TABLE SUPPLIER ADD PRIMARY KEY (S_SUPPKEY);
+ALTER TABLE PARTSUPP ADD PRIMARY KEY (PS_PARTKEY, PS_SUPPKEY);
+ALTER TABLE CUSTOMER ADD PRIMARY KEY (C_CUSTKEY);
+ALTER TABLE ORDERS ADD PRIMARY KEY (O_ORDERKEY);
+ALTER TABLE LINEITEM ADD PRIMARY KEY (L_ORDERKEY, L_LINENUMBER);
+ALTER TABLE NATION ADD PRIMARY KEY (N_NATIONKEY);
+ALTER TABLE REGION ADD PRIMARY KEY (R_REGIONKEY);
 
-drop table if exists orders_1;
-create table orders_1
-(
-    o_1_orderkey      integer        not null,
-    o_1_custkey       integer        not null,
-    o_1_orderstatus   char(1)        not null,
-    o_1_totalprice    decimal(15, 2) not null,
-    o_1_orderdate     date           not null
-);
+-- foreign keys
 
-drop table if exists orders_1a;
-create table orders_1a
-(
-    o_1a_orderkey      integer        not null,
-    o_1a_custkey       integer        not null,
-    o_1a_orderstatus   char(1)        not null
-);
+ALTER TABLE SUPPLIER ADD FOREIGN KEY (S_NATIONKEY) REFERENCES NATION(N_NATIONKEY);
 
-drop table if exists orders_1b;
-create table orders_1b
-(
-    o_1b_orderkey      integer        not null,
-    o_1b_totalprice    decimal(15, 2) not null,
-    o_1b_orderdate     date           not null
-);
+ALTER TABLE PARTSUPP ADD FOREIGN KEY (PS_PARTKEY) REFERENCES PART(P_PARTKEY);
+ALTER TABLE PARTSUPP ADD FOREIGN KEY (PS_SUPPKEY) REFERENCES SUPPLIER(S_SUPPKEY);
 
-drop table if exists orders_2;
-create table orders_2
-(
-    o_2_orderkey      integer        not null,
-    o_2_orderpriority char(15)       not null,
-    o_2_clerk         char(15)       not null,
-    o_2_shippriority  integer        not null,
-    o_2_comment       varchar(79)    not null
-);
+ALTER TABLE CUSTOMER ADD FOREIGN KEY (C_NATIONKEY) REFERENCES NATION(N_NATIONKEY);
 
-drop table if exists orders_2a;
-create table orders_2a
-(
-    o_2a_orderkey      integer        not null,
-    o_2a_orderpriority char(15)       not null,
-    o_2a_clerk         char(15)       not null,
-    o_2a_shippriority  integer        not null,
-    o_2a_comment       varchar(79)    not null
-);
+ALTER TABLE ORDERS ADD FOREIGN KEY (O_CUSTKEY) REFERENCES CUSTOMER(C_CUSTKEY);
 
-insert into orders_1
-select o_orderkey, o_custkey, o_orderstatus, o_totalprice, o_orderdate
-from orders;
+ALTER TABLE LINEITEM ADD FOREIGN KEY (L_ORDERKEY) REFERENCES ORDERS(O_ORDERKEY);
+ALTER TABLE LINEITEM ADD FOREIGN KEY (L_PARTKEY,L_SUPPKEY) REFERENCES PARTSUPP(PS_PARTKEY,PS_SUPPKEY);
 
-insert into orders_1a
-select o_orderkey, o_custkey, o_orderstatus
-from orders;
-
-insert into orders_1b
-select o_orderkey, o_totalprice, o_orderdate
-from orders;
-
-insert into orders_2
-select o_orderkey, o_orderpriority, o_clerk, o_shippriority, o_comment
-from orders;
-
-insert into orders_2a
-select o_orderkey, o_orderpriority, o_clerk, o_shippriority, o_comment
-from orders;
-
--- ALTER TABLE orders_1 ADD PRIMARY KEY (o_1_orderkey);
--- ALTER TABLE orders_1a ADD PRIMARY KEY (o_1a_orderkey);
--- ALTER TABLE orders_1b ADD PRIMARY KEY (o_1b_orderkey);
--- ALTER TABLE orders_2 ADD PRIMARY KEY (o_2_orderkey);
--- ALTER TABLE orders_2a ADD PRIMARY KEY (o_2a_orderkey);
+ALTER TABLE NATION ADD FOREIGN KEY (N_REGIONKEY) REFERENCES REGION(R_REGIONKEY);

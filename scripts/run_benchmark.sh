@@ -24,5 +24,5 @@ fi
 echo -e "\n\n\n\n"
 
 # Run surprise benchmark with unknown queries.
-echo "Running SURPRISE BENCHMARK..."
-java -jar /benchbase/benchbase.jar -b templated -c config/surprise_tpch_config.xml -d /results --create=false --load=false --execute=true
+# echo "Running SURPRISE BENCHMARK..."
+# java -jar /benchbase/benchbase.jar -b templated -c config/surprise_tpch_config.xml -d /results --create=false --load=false --execute=true
