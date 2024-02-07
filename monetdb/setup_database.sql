@@ -96,104 +96,183 @@ COPY INTO partsupp FROM '/benchbase/tpch_data/partsupp.tbl' ON CLIENT USING DELI
 COPY INTO orders FROM '/benchbase/tpch_data/orders.tbl' ON CLIENT USING DELIMITERS '|', E'\n', '"';
 
 COPY INTO lineitem FROM '/benchbase/tpch_data/lineitem.tbl' ON CLIENT USING DELIMITERS '|', E'\n', '"';
---
--- ALTER TABLE PART ADD PRIMARY KEY (P_PARTKEY);
--- ALTER TABLE SUPPLIER ADD PRIMARY KEY (S_SUPPKEY);
--- ALTER TABLE PARTSUPP ADD PRIMARY KEY (PS_PARTKEY, PS_SUPPKEY);
--- ALTER TABLE CUSTOMER ADD PRIMARY KEY (C_CUSTKEY);
--- ALTER TABLE ORDERS ADD PRIMARY KEY (O_ORDERKEY);
--- ALTER TABLE LINEITEM ADD PRIMARY KEY (L_ORDERKEY, L_LINENUMBER);
--- ALTER TABLE NATION ADD PRIMARY KEY (N_NATIONKEY);
--- ALTER TABLE REGION ADD PRIMARY KEY (R_REGIONKEY);
---
--- -- foreign keys
---
--- ALTER TABLE SUPPLIER ADD FOREIGN KEY (S_NATIONKEY) REFERENCES NATION(N_NATIONKEY);
---
--- ALTER TABLE PARTSUPP ADD FOREIGN KEY (PS_PARTKEY) REFERENCES PART(P_PARTKEY);
--- ALTER TABLE PARTSUPP ADD FOREIGN KEY (PS_SUPPKEY) REFERENCES SUPPLIER(S_SUPPKEY);
---
--- ALTER TABLE CUSTOMER ADD FOREIGN KEY (C_NATIONKEY) REFERENCES NATION(N_NATIONKEY);
---
--- ALTER TABLE ORDERS ADD FOREIGN KEY (O_CUSTKEY) REFERENCES CUSTOMER(C_CUSTKEY);
---
--- ALTER TABLE LINEITEM ADD FOREIGN KEY (L_ORDERKEY) REFERENCES ORDERS(O_ORDERKEY);
--- ALTER TABLE LINEITEM ADD FOREIGN KEY (L_PARTKEY,L_SUPPKEY) REFERENCES PARTSUPP(PS_PARTKEY,PS_SUPPKEY);
---
--- ALTER TABLE NATION ADD FOREIGN KEY (N_REGIONKEY) REFERENCES REGION(R_REGIONKEY);
 
 ------------------------------------------------------------------------------------------------------------------------
--- tables for split queries
-------------------------------------------------------------------------------------------------------------------------
+-- tables for UNION
+-----------------------------------------------------------------------------------------------------------------------
 
-drop table if exists orders_1;
-create table orders_1
-(
-    o_1_orderkey      integer        not null,
-    o_1_custkey       integer        not null,
-    o_1_orderstatus   char(1)        not null,
-    o_1_totalprice    decimal(15, 2) not null,
-    o_1_orderdate     date           not null
-);
 
-drop table if exists orders_1a;
-create table orders_1a
-(
-    o_1a_orderkey      integer        not null,
-    o_1a_custkey       integer        not null,
-    o_1a_orderstatus   char(1)        not null
-);
+-- 1992
+DROP TABLE IF EXISTS LINEITEM1992;
+CREATE TABLE LINEITEM1992
+			( l_orderkey    INTEGER NOT NULL,
+                        l_partkey     INTEGER NOT NULL,
+                        l_suppkey     INTEGER NOT NULL,
+                        l_linenumber  INTEGER NOT NULL,
+                        l_quantity    DECIMAL(15,2) NOT NULL,
+                        l_extendedprice  DECIMAL(15,2) NOT NULL,
+                        l_discount    DECIMAL(15,2) NOT NULL,
+                        l_tax         DECIMAL(15,2) NOT NULL,
+                        l_returnflag  CHAR(1) NOT NULL,
+                        l_linestatus  CHAR(1) NOT NULL,
+                        l_shipdate    DATE NOT NULL,
+                        l_commitdate  DATE NOT NULL,
+                        l_receiptdate DATE NOT NULL,
+                        l_shipinstruct CHAR(25) NOT NULL,
+                        l_shipmode     CHAR(10) NOT NULL,
+                        l_comment      VARCHAR(44) NOT NULL);
 
-drop table if exists orders_1b;
-create table orders_1b
-(
-    o_1b_orderkey      integer        not null,
-    o_1b_totalprice    decimal(15, 2) not null,
-    o_1b_orderdate     date           not null
-);
+INSERT INTO LINEITEM1992
+SELECT *
+FROM LINEITEM
+WHERE L_SHIPDATE > DATE '1992-01-01' AND L_SHIPDATE < DATE '1993-01-01';
 
-drop table if exists orders_2;
-create table orders_2
-(
-    o_2_orderkey      integer        not null,
-    o_2_orderpriority char(15)       not null,
-    o_2_clerk         char(15)       not null,
-    o_2_shippriority  integer        not null,
-    o_2_comment       varchar(79)    not null
-);
+-- 1993
+DROP TABLE IF EXISTS LINEITEM1993;
+CREATE TABLE LINEITEM1993
+			( l_orderkey    INTEGER NOT NULL,
+                        l_partkey     INTEGER NOT NULL,
+                        l_suppkey     INTEGER NOT NULL,
+                        l_linenumber  INTEGER NOT NULL,
+                        l_quantity    DECIMAL(15,2) NOT NULL,
+                        l_extendedprice  DECIMAL(15,2) NOT NULL,
+                        l_discount    DECIMAL(15,2) NOT NULL,
+                        l_tax         DECIMAL(15,2) NOT NULL,
+                        l_returnflag  CHAR(1) NOT NULL,
+                        l_linestatus  CHAR(1) NOT NULL,
+                        l_shipdate    DATE NOT NULL,
+                        l_commitdate  DATE NOT NULL,
+                        l_receiptdate DATE NOT NULL,
+                        l_shipinstruct CHAR(25) NOT NULL,
+                        l_shipmode     CHAR(10) NOT NULL,
+                        l_comment      VARCHAR(44) NOT NULL);
 
-drop table if exists orders_2a;
-create table orders_2a
-(
-    o_2a_orderkey      integer        not null,
-    o_2a_orderpriority char(15)       not null,
-    o_2a_clerk         char(15)       not null,
-    o_2a_shippriority  integer        not null,
-    o_2a_comment       varchar(79)    not null
-);
+INSERT INTO LINEITEM1993
+SELECT *
+FROM LINEITEM
+WHERE L_SHIPDATE > DATE '1993-01-01' AND L_SHIPDATE < DATE '1994-01-01';
 
-insert into orders_1
-select o_orderkey, o_custkey, o_orderstatus, o_totalprice, o_orderdate
-from orders;
+-- 1994
+DROP TABLE IF EXISTS LINEITEM1994;
+CREATE TABLE LINEITEM1994
+			( l_orderkey    INTEGER NOT NULL,
+                        l_partkey     INTEGER NOT NULL,
+                        l_suppkey     INTEGER NOT NULL,
+                        l_linenumber  INTEGER NOT NULL,
+                        l_quantity    DECIMAL(15,2) NOT NULL,
+                        l_extendedprice  DECIMAL(15,2) NOT NULL,
+                        l_discount    DECIMAL(15,2) NOT NULL,
+                        l_tax         DECIMAL(15,2) NOT NULL,
+                        l_returnflag  CHAR(1) NOT NULL,
+                        l_linestatus  CHAR(1) NOT NULL,
+                        l_shipdate    DATE NOT NULL,
+                        l_commitdate  DATE NOT NULL,
+                        l_receiptdate DATE NOT NULL,
+                        l_shipinstruct CHAR(25) NOT NULL,
+                        l_shipmode     CHAR(10) NOT NULL,
+                        l_comment      VARCHAR(44) NOT NULL);
 
-insert into orders_1a
-select o_orderkey, o_custkey, o_orderstatus
-from orders;
+INSERT INTO LINEITEM1994
+SELECT *
+FROM LINEITEM
+WHERE L_SHIPDATE > DATE '1994-01-01' AND L_SHIPDATE < DATE '1995-01-01';
 
-insert into orders_1b
-select o_orderkey, o_totalprice, o_orderdate
-from orders;
+-- 1995
+DROP TABLE IF EXISTS LINEITEM1995;
+CREATE TABLE LINEITEM1995
+			( l_orderkey    INTEGER NOT NULL,
+                        l_partkey     INTEGER NOT NULL,
+                        l_suppkey     INTEGER NOT NULL,
+                        l_linenumber  INTEGER NOT NULL,
+                        l_quantity    DECIMAL(15,2) NOT NULL,
+                        l_extendedprice  DECIMAL(15,2) NOT NULL,
+                        l_discount    DECIMAL(15,2) NOT NULL,
+                        l_tax         DECIMAL(15,2) NOT NULL,
+                        l_returnflag  CHAR(1) NOT NULL,
+                        l_linestatus  CHAR(1) NOT NULL,
+                        l_shipdate    DATE NOT NULL,
+                        l_commitdate  DATE NOT NULL,
+                        l_receiptdate DATE NOT NULL,
+                        l_shipinstruct CHAR(25) NOT NULL,
+                        l_shipmode     CHAR(10) NOT NULL,
+                        l_comment      VARCHAR(44) NOT NULL);
 
-insert into orders_2
-select o_orderkey, o_orderpriority, o_clerk, o_shippriority, o_comment
-from orders;
+INSERT INTO LINEITEM1995
+SELECT *
+FROM LINEITEM
+WHERE L_SHIPDATE > DATE '1995-01-01' AND L_SHIPDATE < DATE '1996-01-01';
 
-insert into orders_2a
-select o_orderkey, o_orderpriority, o_clerk, o_shippriority, o_comment
-from orders;
+-- 1996
+DROP TABLE IF EXISTS LINEITEM1996;
+CREATE TABLE LINEITEM1996
+			( l_orderkey    INTEGER NOT NULL,
+                        l_partkey     INTEGER NOT NULL,
+                        l_suppkey     INTEGER NOT NULL,
+                        l_linenumber  INTEGER NOT NULL,
+                        l_quantity    DECIMAL(15,2) NOT NULL,
+                        l_extendedprice  DECIMAL(15,2) NOT NULL,
+                        l_discount    DECIMAL(15,2) NOT NULL,
+                        l_tax         DECIMAL(15,2) NOT NULL,
+                        l_returnflag  CHAR(1) NOT NULL,
+                        l_linestatus  CHAR(1) NOT NULL,
+                        l_shipdate    DATE NOT NULL,
+                        l_commitdate  DATE NOT NULL,
+                        l_receiptdate DATE NOT NULL,
+                        l_shipinstruct CHAR(25) NOT NULL,
+                        l_shipmode     CHAR(10) NOT NULL,
+                        l_comment      VARCHAR(44) NOT NULL);
 
--- ALTER TABLE orders_1 ADD PRIMARY KEY (o_1_orderkey);
--- ALTER TABLE orders_1a ADD PRIMARY KEY (o_1a_orderkey);
--- ALTER TABLE orders_1b ADD PRIMARY KEY (o_1b_orderkey);
--- ALTER TABLE orders_2 ADD PRIMARY KEY (o_2_orderkey);
--- ALTER TABLE orders_2a ADD PRIMARY KEY (o_2a_orderkey);
+INSERT INTO LINEITEM1996
+SELECT *
+FROM LINEITEM
+WHERE L_SHIPDATE > DATE '1996-01-01' AND L_SHIPDATE < DATE '1997-01-01';
+
+-- 1997
+DROP TABLE IF EXISTS LINEITEM1997;
+CREATE TABLE LINEITEM1997
+			( l_orderkey    INTEGER NOT NULL,
+                        l_partkey     INTEGER NOT NULL,
+                        l_suppkey     INTEGER NOT NULL,
+                        l_linenumber  INTEGER NOT NULL,
+                        l_quantity    DECIMAL(15,2) NOT NULL,
+                        l_extendedprice  DECIMAL(15,2) NOT NULL,
+                        l_discount    DECIMAL(15,2) NOT NULL,
+                        l_tax         DECIMAL(15,2) NOT NULL,
+                        l_returnflag  CHAR(1) NOT NULL,
+                        l_linestatus  CHAR(1) NOT NULL,
+                        l_shipdate    DATE NOT NULL,
+                        l_commitdate  DATE NOT NULL,
+                        l_receiptdate DATE NOT NULL,
+                        l_shipinstruct CHAR(25) NOT NULL,
+                        l_shipmode     CHAR(10) NOT NULL,
+                        l_comment      VARCHAR(44) NOT NULL);
+
+INSERT INTO LINEITEM1997
+SELECT *
+FROM LINEITEM
+WHERE L_SHIPDATE > DATE '1997-01-01' AND L_SHIPDATE < DATE '1998-01-01';
+
+-- 1998
+DROP TABLE IF EXISTS LINEITEM1998;
+CREATE TABLE LINEITEM1998
+			( l_orderkey    INTEGER NOT NULL,
+                        l_partkey     INTEGER NOT NULL,
+                        l_suppkey     INTEGER NOT NULL,
+                        l_linenumber  INTEGER NOT NULL,
+                        l_quantity    DECIMAL(15,2) NOT NULL,
+                        l_extendedprice  DECIMAL(15,2) NOT NULL,
+                        l_discount    DECIMAL(15,2) NOT NULL,
+                        l_tax         DECIMAL(15,2) NOT NULL,
+                        l_returnflag  CHAR(1) NOT NULL,
+                        l_linestatus  CHAR(1) NOT NULL,
+                        l_shipdate    DATE NOT NULL,
+                        l_commitdate  DATE NOT NULL,
+                        l_receiptdate DATE NOT NULL,
+                        l_shipinstruct CHAR(25) NOT NULL,
+                        l_shipmode     CHAR(10) NOT NULL,
+                        l_comment      VARCHAR(44) NOT NULL);
+
+INSERT INTO LINEITEM1998
+SELECT *
+FROM LINEITEM
+WHERE L_SHIPDATE > DATE '1998-01-01' AND L_SHIPDATE < DATE '1999-01-01';
