@@ -1,26 +1,22 @@
--- TPC-H Query 3
--- Without time filtering
-
-
-with lineitemUNION as (
+with lineitemUNIONALL as (
         select *
         from lineitem1992
-        union
+        union all
         select *
         from lineitem1993
-        union
+        union all
         select *
         from lineitem1994
-        union
+        union all
         select *
         from lineitem1995
-        union
+        union all
         select *
         from lineitem1996
-        union
+        union all
         select *
         from lineitem1997
-        union
+        union all
         select *
         from lineitem1998
 )
@@ -35,7 +31,7 @@ select
 from
         customer,
         orders,
-        lineitemUNION
+        lineitemUNIONALL
 where
         c_mktsegment = 'BUILDING'
         and c_custkey = o_custkey
@@ -44,3 +40,4 @@ group by
         l_orderkey,
         o_orderdate,
         o_shippriority
+

@@ -1,7 +1,3 @@
--- TPC-H Query 3
--- Without time filtering
--- Without Limit
--- Without Orderby
 select
         l_orderkey,
         sum(l_extendedprice * (1 - l_discount)) as revenue,

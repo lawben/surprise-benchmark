@@ -1,6 +1,3 @@
--- TPC-H Query 3
--- Without time filtering
-
 (
 	select
         l_orderkey,
