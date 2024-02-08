@@ -18,8 +18,8 @@ do
             -v $ROOT_DIR/data/tpch_data:/benchbase/tpch_data:ro \
             -v $ROOT_DIR/data/surprise_tpch_queries.xml:/benchbase/config/surprise_tpch_queries.xml:ro \
             -v $ROOT_DIR/scripts/run_benchmark.sh:/scripts/run_benchmark.sh:ro \
-            --ulimit memlock=1073741824 \
-            --cap-add=sys_nice \
-            surprise-benchmark-$system
+            --ulimit memlock=34359738368 \
+	     --cap-add=sys_nice \
+            --shm-size=16g surprise-benchmark-$system
 done
 
