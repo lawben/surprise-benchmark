@@ -1,6 +1,5 @@
 
 (
--- 1992, 1
 SELECT
         l_orderkey,
         SUM(l_extendedprice * (1 - l_discount)) as revenue,
@@ -21,7 +20,6 @@ GROUP BY
 )
 UNION
 (
--- 1992, 2
 SELECT
         l_orderkey,
         SUM(l_extendedprice * (1 - l_discount)) as revenue,
@@ -42,7 +40,6 @@ GROUP BY
 )
 UNION
 (
--- 1992, 3
 SELECT
         l_orderkey,
         SUM(l_extendedprice * (1 - l_discount)) as revenue,
@@ -63,7 +60,6 @@ GROUP BY
 )
 UNION
 (
--- 1992, 4
 SELECT
         l_orderkey,
         SUM(l_extendedprice * (1 - l_discount)) as revenue,
@@ -84,7 +80,6 @@ GROUP BY
 )
 UNION
 (
--- 1992, 5
 SELECT
         l_orderkey,
         SUM(l_extendedprice * (1 - l_discount)) as revenue,
@@ -105,7 +100,6 @@ GROUP BY
 )
 UNION
 (
--- 1992, 6
 SELECT
         l_orderkey,
         SUM(l_extendedprice * (1 - l_discount)) as revenue,
@@ -126,7 +120,6 @@ GROUP BY
 )
 UNION
 (
--- 1992, 7
 SELECT
         l_orderkey,
         SUM(l_extendedprice * (1 - l_discount)) as revenue,
@@ -147,7 +140,6 @@ GROUP BY
 )
 UNION
 (
--- 1992, 8
 SELECT
         l_orderkey,
         SUM(l_extendedprice * (1 - l_discount)) as revenue,
@@ -168,7 +160,6 @@ GROUP BY
 )
 UNION
 (
--- 1992, 9
 SELECT
         l_orderkey,
         SUM(l_extendedprice * (1 - l_discount)) as revenue,
@@ -189,7 +180,6 @@ GROUP BY
 )
 UNION
 (
--- 1992, 10
 SELECT
         l_orderkey,
         SUM(l_extendedprice * (1 - l_discount)) as revenue,
@@ -210,7 +200,6 @@ GROUP BY
 )
 UNION
 (
--- 1992, 11
 SELECT
         l_orderkey,
         SUM(l_extendedprice * (1 - l_discount)) as revenue,
@@ -231,7 +220,6 @@ GROUP BY
 )
 UNION
 (
--- 1992, 12
 SELECT
         l_orderkey,
         SUM(l_extendedprice * (1 - l_discount)) as revenue,
@@ -252,7 +240,6 @@ GROUP BY
 )
 UNION
 (
--- 1993, 1
 SELECT
         l_orderkey,
         SUM(l_extendedprice * (1 - l_discount)) as revenue,
@@ -273,7 +260,6 @@ GROUP BY
 )
 UNION
 (
--- 1993, 2
 SELECT
         l_orderkey,
         SUM(l_extendedprice * (1 - l_discount)) as revenue,
@@ -294,7 +280,6 @@ GROUP BY
 )
 UNION
 (
--- 1993, 3
 SELECT
         l_orderkey,
         SUM(l_extendedprice * (1 - l_discount)) as revenue,
@@ -315,7 +300,6 @@ GROUP BY
 )
 UNION
 (
--- 1993, 4
 SELECT
         l_orderkey,
         SUM(l_extendedprice * (1 - l_discount)) as revenue,
@@ -336,7 +320,6 @@ GROUP BY
 )
 UNION
 (
--- 1993, 5
 SELECT
         l_orderkey,
         SUM(l_extendedprice * (1 - l_discount)) as revenue,
@@ -357,7 +340,6 @@ GROUP BY
 )
 UNION
 (
--- 1993, 6
 SELECT
         l_orderkey,
         SUM(l_extendedprice * (1 - l_discount)) as revenue,
@@ -378,7 +360,6 @@ GROUP BY
 )
 UNION
 (
--- 1993, 7
 SELECT
         l_orderkey,
         SUM(l_extendedprice * (1 - l_discount)) as revenue,
@@ -399,7 +380,6 @@ GROUP BY
 )
 UNION
 (
--- 1993, 8
 SELECT
         l_orderkey,
         SUM(l_extendedprice * (1 - l_discount)) as revenue,
@@ -420,7 +400,6 @@ GROUP BY
 )
 UNION
 (
--- 1993, 9
 SELECT
         l_orderkey,
         SUM(l_extendedprice * (1 - l_discount)) as revenue,
@@ -441,7 +420,6 @@ GROUP BY
 )
 UNION
 (
--- 1993, 10
 SELECT
         l_orderkey,
         SUM(l_extendedprice * (1 - l_discount)) as revenue,
@@ -462,7 +440,6 @@ GROUP BY
 )
 UNION
 (
--- 1993, 11
 SELECT
         l_orderkey,
         SUM(l_extendedprice * (1 - l_discount)) as revenue,
@@ -483,7 +460,6 @@ GROUP BY
 )
 UNION
 (
--- 1993, 12
 SELECT
         l_orderkey,
         SUM(l_extendedprice * (1 - l_discount)) as revenue,
@@ -504,7 +480,6 @@ GROUP BY
 )
 UNION
 (
--- 1994, 1
 SELECT
         l_orderkey,
         SUM(l_extendedprice * (1 - l_discount)) as revenue,
@@ -525,7 +500,6 @@ GROUP BY
 )
 UNION
 (
--- 1994, 2
 SELECT
         l_orderkey,
         SUM(l_extendedprice * (1 - l_discount)) as revenue,
@@ -546,7 +520,6 @@ GROUP BY
 )
 UNION
 (
--- 1994, 3
 SELECT
         l_orderkey,
         SUM(l_extendedprice * (1 - l_discount)) as revenue,
@@ -567,7 +540,6 @@ GROUP BY
 )
 UNION
 (
--- 1994, 4
 SELECT
         l_orderkey,
         SUM(l_extendedprice * (1 - l_discount)) as revenue,
@@ -588,7 +560,6 @@ GROUP BY
 )
 UNION
 (
--- 1994, 5
 SELECT
         l_orderkey,
         SUM(l_extendedprice * (1 - l_discount)) as revenue,
@@ -609,7 +580,6 @@ GROUP BY
 )
 UNION
 (
--- 1994, 6
 SELECT
         l_orderkey,
         SUM(l_extendedprice * (1 - l_discount)) as revenue,
@@ -630,7 +600,6 @@ GROUP BY
 )
 UNION
 (
--- 1994, 7
 SELECT
         l_orderkey,
         SUM(l_extendedprice * (1 - l_discount)) as revenue,
@@ -651,7 +620,6 @@ GROUP BY
 )
 UNION
 (
--- 1994, 8
 SELECT
         l_orderkey,
         SUM(l_extendedprice * (1 - l_discount)) as revenue,
@@ -672,7 +640,6 @@ GROUP BY
 )
 UNION
 (
--- 1994, 9
 SELECT
         l_orderkey,
         SUM(l_extendedprice * (1 - l_discount)) as revenue,
@@ -693,7 +660,6 @@ GROUP BY
 )
 UNION
 (
--- 1994, 10
 SELECT
         l_orderkey,
         SUM(l_extendedprice * (1 - l_discount)) as revenue,
@@ -714,7 +680,6 @@ GROUP BY
 )
 UNION
 (
--- 1994, 11
 SELECT
         l_orderkey,
         SUM(l_extendedprice * (1 - l_discount)) as revenue,
@@ -735,7 +700,6 @@ GROUP BY
 )
 UNION
 (
--- 1994, 12
 SELECT
         l_orderkey,
         SUM(l_extendedprice * (1 - l_discount)) as revenue,
@@ -756,7 +720,6 @@ GROUP BY
 )
 UNION
 (
--- 1995, 1
 SELECT
         l_orderkey,
         SUM(l_extendedprice * (1 - l_discount)) as revenue,
@@ -777,7 +740,6 @@ GROUP BY
 )
 UNION
 (
--- 1995, 2
 SELECT
         l_orderkey,
         SUM(l_extendedprice * (1 - l_discount)) as revenue,
@@ -798,7 +760,6 @@ GROUP BY
 )
 UNION
 (
--- 1995, 3
 SELECT
         l_orderkey,
         SUM(l_extendedprice * (1 - l_discount)) as revenue,
@@ -819,7 +780,6 @@ GROUP BY
 )
 UNION
 (
--- 1995, 4
 SELECT
         l_orderkey,
         SUM(l_extendedprice * (1 - l_discount)) as revenue,
@@ -840,7 +800,6 @@ GROUP BY
 )
 UNION
 (
--- 1995, 5
 SELECT
         l_orderkey,
         SUM(l_extendedprice * (1 - l_discount)) as revenue,
@@ -861,7 +820,6 @@ GROUP BY
 )
 UNION
 (
--- 1995, 6
 SELECT
         l_orderkey,
         SUM(l_extendedprice * (1 - l_discount)) as revenue,
@@ -882,7 +840,6 @@ GROUP BY
 )
 UNION
 (
--- 1995, 7
 SELECT
         l_orderkey,
         SUM(l_extendedprice * (1 - l_discount)) as revenue,
@@ -903,7 +860,6 @@ GROUP BY
 )
 UNION
 (
--- 1995, 8
 SELECT
         l_orderkey,
         SUM(l_extendedprice * (1 - l_discount)) as revenue,
@@ -924,7 +880,6 @@ GROUP BY
 )
 UNION
 (
--- 1995, 9
 SELECT
         l_orderkey,
         SUM(l_extendedprice * (1 - l_discount)) as revenue,
@@ -945,7 +900,6 @@ GROUP BY
 )
 UNION
 (
--- 1995, 10
 SELECT
         l_orderkey,
         SUM(l_extendedprice * (1 - l_discount)) as revenue,
@@ -966,7 +920,6 @@ GROUP BY
 )
 UNION
 (
--- 1995, 11
 SELECT
         l_orderkey,
         SUM(l_extendedprice * (1 - l_discount)) as revenue,
@@ -987,7 +940,6 @@ GROUP BY
 )
 UNION
 (
--- 1995, 12
 SELECT
         l_orderkey,
         SUM(l_extendedprice * (1 - l_discount)) as revenue,
@@ -1008,7 +960,6 @@ GROUP BY
 )
 UNION
 (
--- 1996, 1
 SELECT
         l_orderkey,
         SUM(l_extendedprice * (1 - l_discount)) as revenue,
@@ -1029,7 +980,6 @@ GROUP BY
 )
 UNION
 (
--- 1996, 2
 SELECT
         l_orderkey,
         SUM(l_extendedprice * (1 - l_discount)) as revenue,
@@ -1050,7 +1000,6 @@ GROUP BY
 )
 UNION
 (
--- 1996, 3
 SELECT
         l_orderkey,
         SUM(l_extendedprice * (1 - l_discount)) as revenue,
@@ -1071,7 +1020,6 @@ GROUP BY
 )
 UNION
 (
--- 1996, 4
 SELECT
         l_orderkey,
         SUM(l_extendedprice * (1 - l_discount)) as revenue,
@@ -1092,7 +1040,6 @@ GROUP BY
 )
 UNION
 (
--- 1996, 5
 SELECT
         l_orderkey,
         SUM(l_extendedprice * (1 - l_discount)) as revenue,
@@ -1113,7 +1060,6 @@ GROUP BY
 )
 UNION
 (
--- 1996, 6
 SELECT
         l_orderkey,
         SUM(l_extendedprice * (1 - l_discount)) as revenue,
@@ -1134,7 +1080,6 @@ GROUP BY
 )
 UNION
 (
--- 1996, 7
 SELECT
         l_orderkey,
         SUM(l_extendedprice * (1 - l_discount)) as revenue,
@@ -1155,7 +1100,6 @@ GROUP BY
 )
 UNION
 (
--- 1996, 8
 SELECT
         l_orderkey,
         SUM(l_extendedprice * (1 - l_discount)) as revenue,
@@ -1176,7 +1120,6 @@ GROUP BY
 )
 UNION
 (
--- 1996, 9
 SELECT
         l_orderkey,
         SUM(l_extendedprice * (1 - l_discount)) as revenue,
@@ -1197,7 +1140,6 @@ GROUP BY
 )
 UNION
 (
--- 1996, 10
 SELECT
         l_orderkey,
         SUM(l_extendedprice * (1 - l_discount)) as revenue,
@@ -1218,7 +1160,6 @@ GROUP BY
 )
 UNION
 (
--- 1996, 11
 SELECT
         l_orderkey,
         SUM(l_extendedprice * (1 - l_discount)) as revenue,
@@ -1239,7 +1180,6 @@ GROUP BY
 )
 UNION
 (
--- 1996, 12
 SELECT
         l_orderkey,
         SUM(l_extendedprice * (1 - l_discount)) as revenue,
@@ -1260,7 +1200,6 @@ GROUP BY
 )
 UNION
 (
--- 1997, 1
 SELECT
         l_orderkey,
         SUM(l_extendedprice * (1 - l_discount)) as revenue,
@@ -1281,7 +1220,6 @@ GROUP BY
 )
 UNION
 (
--- 1997, 2
 SELECT
         l_orderkey,
         SUM(l_extendedprice * (1 - l_discount)) as revenue,
@@ -1302,7 +1240,6 @@ GROUP BY
 )
 UNION
 (
--- 1997, 3
 SELECT
         l_orderkey,
         SUM(l_extendedprice * (1 - l_discount)) as revenue,
@@ -1323,7 +1260,6 @@ GROUP BY
 )
 UNION
 (
--- 1997, 4
 SELECT
         l_orderkey,
         SUM(l_extendedprice * (1 - l_discount)) as revenue,
@@ -1344,7 +1280,6 @@ GROUP BY
 )
 UNION
 (
--- 1997, 5
 SELECT
         l_orderkey,
         SUM(l_extendedprice * (1 - l_discount)) as revenue,
@@ -1365,7 +1300,6 @@ GROUP BY
 )
 UNION
 (
--- 1997, 6
 SELECT
         l_orderkey,
         SUM(l_extendedprice * (1 - l_discount)) as revenue,
@@ -1386,7 +1320,6 @@ GROUP BY
 )
 UNION
 (
--- 1997, 7
 SELECT
         l_orderkey,
         SUM(l_extendedprice * (1 - l_discount)) as revenue,
@@ -1407,7 +1340,6 @@ GROUP BY
 )
 UNION
 (
--- 1997, 8
 SELECT
         l_orderkey,
         SUM(l_extendedprice * (1 - l_discount)) as revenue,
@@ -1428,7 +1360,6 @@ GROUP BY
 )
 UNION
 (
--- 1997, 9
 SELECT
         l_orderkey,
         SUM(l_extendedprice * (1 - l_discount)) as revenue,
@@ -1449,7 +1380,6 @@ GROUP BY
 )
 UNION
 (
--- 1997, 10
 SELECT
         l_orderkey,
         SUM(l_extendedprice * (1 - l_discount)) as revenue,
@@ -1470,7 +1400,6 @@ GROUP BY
 )
 UNION
 (
--- 1997, 11
 SELECT
         l_orderkey,
         SUM(l_extendedprice * (1 - l_discount)) as revenue,
@@ -1491,7 +1420,6 @@ GROUP BY
 )
 UNION
 (
--- 1997, 12
 SELECT
         l_orderkey,
         SUM(l_extendedprice * (1 - l_discount)) as revenue,
@@ -1512,7 +1440,6 @@ GROUP BY
 )
 UNION
 (
--- 1998, 1
 SELECT
         l_orderkey,
         SUM(l_extendedprice * (1 - l_discount)) as revenue,
@@ -1533,7 +1460,6 @@ GROUP BY
 )
 UNION
 (
--- 1998, 2
 SELECT
         l_orderkey,
         SUM(l_extendedprice * (1 - l_discount)) as revenue,
@@ -1554,7 +1480,6 @@ GROUP BY
 )
 UNION
 (
--- 1998, 3
 SELECT
         l_orderkey,
         SUM(l_extendedprice * (1 - l_discount)) as revenue,
@@ -1575,7 +1500,6 @@ GROUP BY
 )
 UNION
 (
--- 1998, 4
 SELECT
         l_orderkey,
         SUM(l_extendedprice * (1 - l_discount)) as revenue,
@@ -1596,7 +1520,6 @@ GROUP BY
 )
 UNION
 (
--- 1998, 5
 SELECT
         l_orderkey,
         SUM(l_extendedprice * (1 - l_discount)) as revenue,
@@ -1617,7 +1540,6 @@ GROUP BY
 )
 UNION
 (
--- 1998, 6
 SELECT
         l_orderkey,
         SUM(l_extendedprice * (1 - l_discount)) as revenue,
@@ -1638,7 +1560,6 @@ GROUP BY
 )
 UNION
 (
--- 1998, 7
 SELECT
         l_orderkey,
         SUM(l_extendedprice * (1 - l_discount)) as revenue,
@@ -1659,7 +1580,6 @@ GROUP BY
 )
 UNION
 (
--- 1998, 8
 SELECT
         l_orderkey,
         SUM(l_extendedprice * (1 - l_discount)) as revenue,
@@ -1680,7 +1600,6 @@ GROUP BY
 )
 UNION
 (
--- 1998, 9
 SELECT
         l_orderkey,
         SUM(l_extendedprice * (1 - l_discount)) as revenue,
@@ -1701,7 +1620,6 @@ GROUP BY
 )
 UNION
 (
--- 1998, 10
 SELECT
         l_orderkey,
         SUM(l_extendedprice * (1 - l_discount)) as revenue,
@@ -1722,7 +1640,6 @@ GROUP BY
 )
 UNION
 (
--- 1998, 11
 SELECT
         l_orderkey,
         SUM(l_extendedprice * (1 - l_discount)) as revenue,
@@ -1743,7 +1660,6 @@ GROUP BY
 )
 UNION
 (
--- 1998, 12
 SELECT
         l_orderkey,
         SUM(l_extendedprice * (1 - l_discount)) as revenue,

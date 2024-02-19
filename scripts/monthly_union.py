@@ -14,7 +14,6 @@ def union_last(year_range, month_range, if_unionall):
     result = ""
     template = """
 (
--- {year}, {month}
 SELECT
         l_orderkey,
         SUM(l_extendedprice * (1 - l_discount)) as revenue,
