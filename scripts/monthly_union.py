@@ -11,7 +11,7 @@ def get_union_op(if_unionall):
 
 def union_last(year_range, month_range, if_unionall):
     operator = get_union_op(if_unionall)
-    result = "with lineitem" + operator + " as ("
+    result = ""
     template = """
 (
 -- {year}, {month}
@@ -44,7 +44,7 @@ GROUP BY
 
 def union_first(year_range, month_range, if_unionall):
     operator = get_union_op(if_unionall)
-    result = "with lineitem" + operator + " as ("
+    result = "WITH LINEITEM_NEW AS ("
     for year in year_range:
         for month in month_range:
             table_name = get_table_name(year, month)
@@ -52,6 +52,25 @@ def union_first(year_range, month_range, if_unionall):
             if year != 1998 or month != 12:
                 result += operator + "\n"
     result += ")"
+    result += """
+SELECT
+        l_orderkey,
+        SUM(l_extendedprice * (1 - l_discount)) as revenue,
+        o_orderdate,
+        o_shippriority
+FROM
+        customer,
+        orders,
+        LINEITEM_NEW
+WHERE
+        c_mktsegment = 'BUILDING'
+        AND c_custkey = o_custkey
+        AND l_orderkey = o_orderkey
+GROUP BY
+        l_orderkey,
+        o_orderdate,
+        o_shippriority;
+"""
     return result
 
 def psql_monthly_union(year, month):
