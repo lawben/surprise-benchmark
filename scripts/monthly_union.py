@@ -72,6 +72,34 @@ GROUP BY
 """
     return result
 
+def monetdb_monthly_union(year, month):
+    table_name = get_table_name(year, month)
+    template = """
+-- {year}, {month}
+DROP TABLE IF EXISTS {table_name};
+CREATE TABLE {table_name} ( l_orderkey    INTEGER NOT NULL,
+                            l_partkey     INTEGER NOT NULL,
+                            l_suppkey     INTEGER NOT NULL,
+                            l_linenumber  INTEGER NOT NULL,
+                            l_quantity    DECIMAL(15,2) NOT NULL,
+                            l_extendedprice  DECIMAL(15,2) NOT NULL,
+                            l_discount    DECIMAL(15,2) NOT NULL,
+                            l_tax         DECIMAL(15,2) NOT NULL,
+                            l_returnflag  CHAR(1) NOT NULL,
+                            l_linestatus  CHAR(1) NOT NULL,
+                            l_shipdate    DATE NOT NULL,
+                            l_commitdate  DATE NOT NULL,
+                            l_receiptdate DATE NOT NULL,
+                            l_shipinstruct CHAR(25) NOT NULL,
+                            l_shipmode     CHAR(10) NOT NULL,
+                            l_comment      VARCHAR(44) NOT NULL);
+INSERT INTO {table_name}
+SELECT *
+FROM LINEITEM
+WHERE L_SHIPDATE > DATE '{year}-{month}-01' AND L_SHIPDATE < DATE '{year}-{month}-01'+ INTERVAL '1' MONTH;
+"""
+    return template.format(table_name=table_name, year=year, month=month)
+
 def psql_monthly_union(year, month):
     table_name = get_table_name(year, month)
     template = """
@@ -114,7 +142,7 @@ ALTER TABLE {table_name} ADD FOREIGN KEY (L_PARTKEY,L_SUPPKEY) REFERENCES PARTSU
 
 def main():
     parser = argparse.ArgumentParser(description='Generation of SQL for union')
-    parser.add_argument('--option', help='psql_create_table, union_first, unionall_first, union_last, unionall_last')
+    parser.add_argument('--option', help='psql_create_table, monetdb_create_table, union_first, unionall_first, union_last, unionall_last')
     
     args = parser.parse_args()
 
@@ -125,6 +153,10 @@ def main():
         for year in year_range:
             for month in month_range:
                 print(psql_monthly_union(year, month))
+    elif option == 'monetdb_create_table':
+        for year in year_range:
+            for month in month_range:
+                print(monetdb_monthly_union(year, month))
     elif option == 'union_first':
         print(union_first(year_range, month_range, False))
     elif option == 'unionall_first':
