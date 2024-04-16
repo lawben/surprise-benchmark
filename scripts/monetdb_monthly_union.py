@@ -1,0 +1,134 @@
+import argparse
+
+def get_table_name(year, month):
+    return "LINEITEM_" + str(year) + "_" + str(month)
+
+
+def get_union_op(if_unionall):
+    union_op = "UNION"
+    if if_unionall:
+        union_op += " ALL"
+    return union_op
+
+def union_last(year_range, month_range, if_unionall = False):
+    union_op = get_union_op(if_unionall)
+    result = ""
+    template = """
+(
+SELECT
+        l_orderkey,
+        SUM(l_extendedprice * (1 - l_discount)) as revenue,
+        o_orderdate,
+        o_shippriority
+FROM
+        customer,
+        orders,
+        {table_name}
+WHERE
+        c_mktsegment = 'BUILDING'
+        AND c_custkey = o_custkey
+        AND l_orderkey = o_orderkey
+GROUP BY
+        l_orderkey,
+        o_orderdate,
+        o_shippriority
+)
+"""
+    for year in year_range:
+        for month in month_range:
+            table_name = get_table_name(year, month)
+            result += template.format(table_name=table_name, year=year, month=month)
+            if year != 1998 or month != 12:
+                result += union_op
+    return result
+
+def union_first(year_range, month_range, if_unionall = False):
+    union_op = get_union_op(if_unionall)
+    result = "WITH LINEITEM_NEW AS (\n"
+    for year in year_range:
+        for month in month_range:
+            table_name = get_table_name(year, month)
+            result += "SELECT * FROM " + table_name + "\n"
+            if year != 1998 or month != 12:
+                result += union_op + "\n"
+    result += ")"
+    result += """
+SELECT
+        l_orderkey,
+        SUM(l_extendedprice * (1 - l_discount)) as revenue,
+        o_orderdate,
+        o_shippriority
+FROM
+        customer,
+        orders,
+        LINEITEM_NEW
+WHERE
+        c_mktsegment = 'BUILDING'
+        AND c_custkey = o_custkey
+        AND l_orderkey = o_orderkey
+GROUP BY
+        l_orderkey,
+        o_orderdate,
+        o_shippriority;
+"""
+    return result
+
+def monetdb_create_monthly(year, month):
+    table_name = get_table_name(year, month)
+    template = """
+-- {year}, {month}
+DROP TABLE IF EXISTS {table_name};
+CREATE TABLE {table_name} ( l_orderkey    INTEGER NOT NULL,
+                            l_partkey     INTEGER NOT NULL,
+                            l_suppkey     INTEGER NOT NULL,
+                            l_linenumber  INTEGER NOT NULL,
+                            l_quantity    DECIMAL(15,2) NOT NULL,
+                            l_extendedprice  DECIMAL(15,2) NOT NULL,
+                            l_discount    DECIMAL(15,2) NOT NULL,
+                            l_tax         DECIMAL(15,2) NOT NULL,
+                            l_returnflag  CHAR(1) NOT NULL,
+                            l_linestatus  CHAR(1) NOT NULL,
+                            l_shipdate    DATE NOT NULL,
+                            l_commitdate  DATE NOT NULL,
+                            l_receiptdate DATE NOT NULL,
+                            l_shipinstruct CHAR(25) NOT NULL,
+                            l_shipmode     CHAR(10) NOT NULL,
+                            l_comment      VARCHAR(44) NOT NULL);
+INSERT INTO {table_name}
+SELECT *
+FROM LINEITEM
+WHERE L_SHIPDATE > DATE '{year}-{month}-01' AND L_SHIPDATE < DATE '{year}-{month}-01'+ INTERVAL '1' MONTH;
+"""
+    return template.format(table_name=table_name, year=year, month=month)
+
+
+def main():
+    parser = argparse.ArgumentParser(description='Generation of SQL for union')
+    parser.add_argument('--option', help='monetdb_create_table, union_first, unionall_first, union_last, unionall_last')
+
+    args = parser.parse_args()
+
+    option = args.option
+    year_range = range(1992, 1998 + 1)
+    month_range = range(1, 12 + 1)
+
+    if option == 'monetdb_create_table':
+        for year in year_range:
+            for month in month_range:
+                print(monetdb_create_monthly(year, month))
+    elif option == 'union_first':
+        print(union_first(year_range, month_range))
+    elif option == 'unionall_first':
+        if_unionall = True
+        print(union_first(year_range, month_range, if_unionall))
+    elif option == 'union_last':
+        print(union_last(year_range, month_range))
+    elif option == 'unionall_last':
+        if_unionall = True
+        print(union_last(year_range, month_range, if_unionall))
+    else:
+        print("INVALID")
+        parser.print_help()
+
+if __name__ == '__main__':
+    main()
